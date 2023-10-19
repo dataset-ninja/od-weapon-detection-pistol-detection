@@ -3,8 +3,8 @@ import os
 from dataset_tools.convert import unpack_if_archive
 import src.settings as s
 from urllib.parse import unquote, urlparse
-from supervisely.io.fs import get_file_name, get_file_size
-import shutil
+from supervisely.io.fs import get_file_name, get_file_name_with_ext
+import xml.etree.ElementTree as ET
 
 from tqdm import tqdm
 
@@ -69,17 +69,66 @@ def count_files(path, extension):
 def convert_and_upload_supervisely_project(
     api: sly.Api, workspace_id: int, project_name: str
 ) -> sly.ProjectInfo:
-    ### Function should read local dataset and upload it to Supervisely project, then return project info.###
-    raise NotImplementedError("The converter should be implemented manually.")
+    pistol_images_path = os.path.join("OD-WeaponDetection-master","Pistol detection","Weapons")
+    pistol_anns_path = os.path.join("OD-WeaponDetection-master","Pistol detection","xmls")
 
-    # dataset_path = "/local/path/to/your/dataset" # general way
-    # dataset_path = download_dataset(teamfiles_dir) # for large datasets stored on instance
+    batch_size = 30
 
-    # ... some code here ...
+    images_ext = ".jpg"
+    anns_ext = ".xml"
 
-    # sly.logger.info('Deleting temporary app storage files...')
-    # shutil.rmtree(storage_dir)
-
-    # return project
+    ds_name = "ds"
 
 
+    def create_ann(image_path):
+        labels = []
+
+        image_name = get_file_name(image_path)
+        ann_path = os.path.join(pistol_anns_path, image_name + anns_ext)
+
+        tree = ET.parse(ann_path)
+        root = tree.getroot()
+        img_height = int(root.find(".//height").text)
+        img_wight = int(root.find(".//width").text)
+        objects_content = root.findall(".//object")
+        for obj_data in objects_content:
+            name = obj_data.find(".//name").text
+            obj_class = meta.get_obj_class(name)
+            bndbox = obj_data.find(".//bndbox")
+            top = int(bndbox.find(".//ymin").text)
+            left = int(bndbox.find(".//xmin").text)
+            bottom = int(bndbox.find(".//ymax").text)
+            right = int(bndbox.find(".//xmax").text)
+
+            rectangle = sly.Rectangle(top=top, left=left, bottom=bottom, right=right)
+            label = sly.Label(rectangle, obj_class)
+            labels.append(label)
+
+        return sly.Annotation(img_size=(img_height, img_wight), labels=labels)
+
+
+    pistol = sly.ObjClass("pistol", sly.Rectangle)
+
+
+    project = api.project.create(workspace_id, project_name, change_name_if_conflict=True)
+    meta = sly.ProjectMeta(obj_classes=[pistol])
+    api.project.update_meta(project.id, meta.to_json())
+
+    dataset = api.dataset.create(project.id, ds_name, change_name_if_conflict=True)
+
+    image_pathes = [os.path.join(pistol_images_path, img) for img in os.listdir(pistol_images_path)]
+
+    progress = sly.Progress("Create dataset {}".format(ds_name), len(image_pathes))
+
+    for img_pathes_batch in sly.batched(image_pathes, batch_size=batch_size):
+        img_names_batch = [get_file_name_with_ext(im_path) for im_path in img_pathes_batch]
+
+        img_infos = api.image.upload_paths(dataset.id, img_names_batch, img_pathes_batch)
+        img_ids = [im_info.id for im_info in img_infos]
+
+        anns = [create_ann(image_path) for image_path in img_pathes_batch]
+        api.annotation.upload_anns(img_ids, anns)
+
+        progress.iters_done_report(len(img_names_batch))
+
+    return project

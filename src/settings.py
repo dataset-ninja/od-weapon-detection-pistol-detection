@@ -13,8 +13,8 @@ from dataset_tools.templates import (
 ##################################
 # * Before uploading to instance #
 ##################################
-PROJECT_NAME: str = "OD-WeaponDetection: Knife Detection"
-PROJECT_NAME_FULL: str = "OD-WeaponDetection: Knife Detection"
+PROJECT_NAME: str = "OD-WeaponDetection: Pistol Detection"
+PROJECT_NAME_FULL: str = "OD-WeaponDetection: Pistol Detection"
 HIDE_DATASET = True  # set False when 100% sure about repo quality
 
 ##################################
@@ -34,10 +34,10 @@ if RELEASE_DATE is None:
 HOMEPAGE_URL: str = "https://github.com/ari-dasci/OD-WeaponDetection"
 # e.g. "https://some.com/dataset/homepage"
 
-PREVIEW_IMAGE_ID: int = None
+PREVIEW_IMAGE_ID: int = 7426046
 # This should be filled AFTER uploading images to instance, just ID of any image.
 
-GITHUB_URL: str = None
+GITHUB_URL: str = "https://github.com/dataset-ninja/od-weapon-detection-pistol-detection"
 # URL to GitHub repo on dataset ninja (e.g. "https://github.com/dataset-ninja/some-dataset")
 
 ##################################
