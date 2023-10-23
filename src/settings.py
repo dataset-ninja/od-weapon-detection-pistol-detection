@@ -55,7 +55,7 @@ PAPER: Optional[Union[str, List[str], Dict[str, str]]] = ["https://www.sciencedi
 BLOGPOST: Optional[Union[str, List[str], Dict[str, str]]] = ["https://dasci.es/transferencia/open-data/24705/"]
 REPOSITORY: Optional[Union[str, List[str], Dict[str, str]]] = None
 
-CITATION_URL: Optional[str] = ["https://www.sciencedirect.com/science/article/abs/pii/S0925231217308196"]
+CITATION_URL: Optional[str] = "https://www.sciencedirect.com/science/article/abs/pii/S0925231217308196"
 AUTHORS: Optional[List[str]] = ["Fransco Pérez Hernandez", "Alberto Castillo Lamas"]
 
 ORGANIZATION_NAME: Optional[Union[str, List[str]]] = ["University of Granada, Spain", "King Abdulaziz University (KAU) Jeddah, Saudi Arabia"]
