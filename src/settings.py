@@ -57,7 +57,7 @@ REPOSITORY: Optional[Union[str, List[str], Dict[str, str]]] = None
 
 CITATION_URL: Optional[str] = "https://www.sciencedirect.com/science/article/abs/pii/S0925231217308196"
 AUTHORS: Optional[List[str]] = ["Fransco Pérez Hernandez", "Alberto Castillo Lamas"]
-AUTHORS_CONTACTS: Optional[List[str]] = ["siham@ugr.es", "siham.tabik@gmail.com", "herrera@decsai.ugr.es"]
+AUTHORS_CONTACTS: Optional[List[str]] = ["fperezhernandez92@gmail.com", "fperezhernandez@ugr.es", "alcasla90@gmail.com", "albertocl@ugr.es"]
 
 ORGANIZATION_NAME: Optional[Union[str, List[str]]] = ["University of Granada, Spain", "King Abdulaziz University (KAU) Jeddah, Saudi Arabia"]
 ORGANIZATION_URL: Optional[Union[str, List[str]]] = ["http://www.ugr.es/en", "https://www.kau.edu.sa/home_english.aspx"]
