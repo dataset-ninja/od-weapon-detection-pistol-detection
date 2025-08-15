@@ -1,6 +1,6 @@
 Dataset **OD-WeaponDetection: Pistol Detection** can be downloaded in [Supervisely format](https://developer.supervisely.com/api-references/supervisely-annotation-json-format):
 
- [Download](https://assets.supervisely.com/remote/eyJsaW5rIjogImZzOi8vYXNzZXRzLzI3OTVfT0QtV2VhcG9uRGV0ZWN0aW9uOiBQaXN0b2wgRGV0ZWN0aW9uL29kLXdlYXBvbmRldGVjdGlvbjotcGlzdG9sLWRldGVjdGlvbi1EYXRhc2V0TmluamEudGFyIiwgInNpZyI6ICJ1bmhubFRUQ3JEK0FsL0xBdFZUb3Y1NlhuZmNmcHQ5amRabjhLUU14aUVvPSJ9)
+ [Download](https://assets.supervisely.com/remote/eyJsaW5rIjogInMzOi8vc3VwZXJ2aXNlbHktZGF0YXNldHMvMjc5NV9PRC1XZWFwb25EZXRlY3Rpb246IFBpc3RvbCBEZXRlY3Rpb24vb2Qtd2VhcG9uZGV0ZWN0aW9uOi1waXN0b2wtZGV0ZWN0aW9uLURhdGFzZXROaW5qYS50YXIiLCAic2lnIjogIlovWkR3TGYvaGRITFRZcUhIUjk2a2ZmRnhXWi9uV2lVMlNFN2U5NEZTL2s9In0=?response-content-disposition=attachment%3B%20filename%3D%22od-weapondetection%3A-pistol-detection-DatasetNinja.tar%22)
 
 As an alternative, it can be downloaded with *dataset-tools* package:
 ``` bash
